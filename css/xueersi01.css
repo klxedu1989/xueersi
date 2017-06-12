@@ -1,0 +1,540 @@
+body, ul, li, dl, dd, a, ol {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.clearfix:after {
+  clear: both;
+  content: '';
+  display: block; }
+
+.clearfix {
+  zoom: 1; }
+
+@media all and (max-width: 770px) {
+  .box {
+    width: 100%; }
+
+  header .banner img {
+    width: 100%;
+    height: auto; }
+
+  .mask video {
+    width: 100%;
+    height: 20rem;
+    left: 0; } }
+@media (min-width: 770px) {
+  .box {
+    width: 94.54545%;
+    margin: 0 auto; }
+
+  header .banner img {
+    width: 32rem;
+    height: 14.5rem; }
+
+  .mask video {
+    width: 94.54545%;
+    height: 25rem;
+    margin-left: -18.2rem;
+    left: 50%; } }
+@media (min-width: 990px) {
+  .box {
+    width: 97.77778%;
+    margin: 0 auto; }
+
+  header .banner img {
+    width: 32rem;
+    height: 14.5rem; }
+
+  .mask video {
+    width: 97.77778%;
+    height: 30rem;
+    margin-left: -24.2rem;
+    left: 50%; } }
+@media (min-width: 1200px) {
+  .box {
+    width: 87.18887%;
+    margin: 0 auto; }
+
+  header .banner img {
+    width: 32rem;
+    height: 14.5rem; }
+
+  .mask video {
+    width: 87.18887%;
+    height: 35rem;
+    margin-left: -29.775rem;
+    left: 50%; } }
+.space-10 {
+  width: 100%;
+  height: 0.5rem; }
+
+.space-20 {
+  width: 100%;
+  height: 1rem; }
+
+.mask {
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000000;
+  display: none; }
+  .mask span {
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2.4rem;
+    line-height: 2.5rem;
+    border-radius: 50%;
+    border: 0.05rem solid #fff;
+    color: #fff;
+    margin: 0 auto;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.25rem;
+    margin-top: 1rem; }
+  .mask video {
+    background: #000;
+    position: absolute;
+    bottom: 5rem; }
+
+header .appdownload {
+  width: 100%;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  overflow: hidden;
+  position: relate; }
+  header .appdownload .appdownload-left {
+    background: #333;
+    width: 75.10981%; }
+    header .appdownload .appdownload-left .appdownload-left-span {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border: 0.05rem solid #fff;
+      font-size: 0.9rem;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 1rem;
+      margin: 0 0.75rem;
+      color: #fff; }
+      header .appdownload .appdownload-left .appdownload-left-span:hover {
+        cursor: pointer; }
+    header .appdownload .appdownload-left .appdownload-left-a {
+      display: inline-block;
+      width: 7.15rem;
+      height: 2.5rem;
+      background: url("../img/applogo.png") no-repeat 0 0.45rem;
+      background-size: 100%;
+      text-indent: -9999rem;
+      color: #fff; }
+  header .appdownload .appdownload-right {
+    background: #e74c3c;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    width: 24.89019%; }
+    header .appdownload .appdownload-right:hover {
+      text-decoration: none; }
+header .search-box-cover {
+  height: 2.5rem;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  background: #2e98ef;
+  opacity: 0;
+  z-index: 10; }
+header .search-box {
+  height: 2.5rem;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  z-index: 15;
+  background: transparent; }
+  header .search-box .serch-box-a1 {
+    width: 15%;
+    height: 100%;
+    display: block;
+    text-align: center;
+    line-height: 2.5rem;
+    color: #fff;
+    font-size: 0.75rem;
+    background: transparent url("../img/m.logo.png") center no-repeat;
+    background-size: 1.25rem 1.35rem; }
+    header .search-box .serch-box-a1.serch-box-a2 {
+      background: transparent url("../img/a-monkey.png") center no-repeat;
+      background-size: 2.5rem; }
+    header .search-box .serch-box-a1 .search-right-span {
+      display: none; }
+    header .search-box .serch-box-a1 img {
+      width: 1.3rem;
+      height: 1.3rem;
+      margin: 0.6rem 4.35rem; }
+      header .search-box .serch-box-a1 img.search-right-img {
+        width: 2.5rem;
+        height: 1.0rem; }
+  header .search-box .search-Mbox {
+    width: 69%;
+    background: #eee;
+    height: 1.7rem;
+    border-radius: 1rem;
+    margin-top: 0.4rem;
+    overflow: hidden;
+    box-sizing: border-box; }
+    header .search-box .search-Mbox .search-span {
+      color: #a0a0a0;
+      width: 6%;
+      display: inline-block;
+      text-align: center;
+      margin-top: 0.45rem; }
+    header .search-box .search-Mbox .search-input {
+      width: 90%;
+      background: #eee;
+      height: 100%;
+      outline: none;
+      border: none;
+      line-height: 0.8rem;
+      color: #333;
+      font-size: 0.6rem;
+      padding-left: 0.5rem; }
+header .banner {
+  background: #fff; }
+
+section .tabs-ul {
+  display: flex;
+  background: #f5f5f5;
+  overflow: hidden;
+  height: 4.5rem; }
+  section .tabs-ul li {
+    flex: 1;
+    cursor: pointer;
+    text-align: center;
+    border: 0.05rem solid #f5f5f5; }
+    section .tabs-ul li.select {
+      border: 0.05rem solid #dcdcdc;
+      border-bottom: none;
+      background: #fff;
+      position: relative;
+      z-index: 9; }
+    section .tabs-ul li.select:nth-child(1) {
+      border-top: 0.1rem solid #fc3d3a; }
+    section .tabs-ul li.select:nth-child(2) {
+      border-top: 0.1rem solid #19b2ff; }
+    section .tabs-ul li.select:nth-child(3) {
+      border-top: 0.1rem solid #fc9426; }
+    section .tabs-ul li.select:nth-child(4) {
+      border-top: 0.1rem solid #00c87c; }
+    section .tabs-ul li .tabs-li-img {
+      display: block;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: 0.25rem auto; }
+    section .tabs-ul li .tabs-li-span {
+      font-size: 0.7rem;
+      color: #7f7f7f;
+      line-height: 1.5rem; }
+section .tabs-con-ol li {
+  width: 100%;
+  border: 0.05rem solid #dcdcdc;
+  background: #fff;
+  display: none;
+  position: relative;
+  top: -0.05rem; }
+  section .tabs-con-ol li .tabs-cud {
+    padding: 0.4rem; }
+    section .tabs-con-ol li .tabs-cud .tabs-con-ul-div {
+      display: flex; }
+      section .tabs-con-ol li .tabs-cud .tabs-con-ul-div .tabs-con-ul-div-span {
+        display: inline-block;
+        flex: 1;
+        box-sizing: border-box; }
+        section .tabs-con-ol li .tabs-cud .tabs-con-ul-div .tabs-con-ul-div-span a {
+          color: #3bafda;
+          padding-left: 0.25rem;
+          display: inline-block;
+          margin-left: 20%;
+          border-left: 0.15rem solid #3bafda;
+          text-decoration: none;
+          margin-top: 0.25rem;
+          font-size: 0.8rem; }
+      section .tabs-con-ol li .tabs-cud .tabs-con-ul-div .tabs-con-ul-div-ul {
+        display: inline-block;
+        flex: 3;
+        overflow: hidden; }
+        section .tabs-con-ol li .tabs-cud .tabs-con-ul-div .tabs-con-ul-div-ul li {
+          width: 23%;
+          display: inline-block;
+          height: 1.75rem;
+          border: none; }
+          section .tabs-con-ol li .tabs-cud .tabs-con-ul-div .tabs-con-ul-div-ul li a {
+            color: #666;
+            width: 100%;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 0.25rem;
+            font-size: 0.8rem; }
+  section .tabs-con-ol li.active {
+    display: block; }
+section .zb-header {
+  display: flex;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #333; }
+  section .zb-header .zb-header-l {
+    width: 35%;
+    margin-top: 0.4rem;
+    border-top: 0.05rem solid #ededed; }
+  section .zb-header .zb-header-m {
+    width: 30%; }
+section .zb {
+  border: 0.05rem solid #ededed;
+  padding-top: 1.05rem;
+  background: #fff; }
+  section .zb .zb-middle .zb-middle-u {
+    width: 100%; }
+    section .zb .zb-middle .zb-middle-u .zb-middle-li {
+      float: left !important;
+      width: 45% !important;
+      margin: 1rem 2.5% 0 2.5%;
+      border-bottom: 0.05rem solid #ededed;
+      color: #333;
+      display: inline-block !important; }
+      section .zb .zb-middle .zb-middle-u .zb-middle-li img {
+        display: block;
+        height: 5.85rem;
+        max-width: 100%;
+        cursor: pointer; }
+      section .zb .zb-middle .zb-middle-u .zb-middle-li span {
+        display: block;
+        height: 1.75rem;
+        line-height: 1.75rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        overflow: hidden; }
+      section .zb .zb-middle .zb-middle-u .zb-middle-li i {
+        display: block;
+        height: 1.25rem;
+        line-height: 1.25rem;
+        font-size: 0.6rem;
+        font-style: normal;
+        overflow: hidden; }
+      section .zb .zb-middle .zb-middle-u .zb-middle-li b {
+        display: block;
+        height: 2rem;
+        line-height: 1.25rem;
+        font-size: 0.5rem;
+        font-weight: 500;
+        overflow: hidden; }
+  section .zb .zb-middle01 .zb-m-shuju02 {
+    width: 100%; }
+    section .zb .zb-middle01 .zb-m-shuju02 .zb-middle-li01 {
+      float: left !important;
+      width: 45% !important;
+      margin: 1rem 2.5% 0 2.5%;
+      border-bottom: 0.05rem solid #ededed;
+      color: #333;
+      display: inline-block !important; }
+      section .zb .zb-middle01 .zb-m-shuju02 .zb-middle-li01 img {
+        display: block;
+        height: 5.85rem;
+        max-width: 100%;
+        cursor: pointer; }
+      section .zb .zb-middle01 .zb-m-shuju02 .zb-middle-li01 span {
+        display: block;
+        height: 1.75rem;
+        line-height: 1.75rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        overflow: hidden; }
+      section .zb .zb-middle01 .zb-m-shuju02 .zb-middle-li01 i {
+        display: block;
+        height: 1.25rem;
+        line-height: 1.25rem;
+        font-size: 0.6rem;
+        font-style: normal;
+        overflow: hidden; }
+      section .zb .zb-middle01 .zb-m-shuju02 .zb-middle-li01 b {
+        display: block;
+        height: 2rem;
+        line-height: 1.25rem;
+        font-size: 0.5rem;
+        font-weight: 500;
+        overflow: hidden; }
+  section .zb .zb-footer {
+    width: 100%;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    background: #fbfbfb; }
+    section .zb .zb-footer .zb-footer-a {
+      color: #999;
+      font-size: 0.75rem;
+      text-decoration: none; }
+section .instruction {
+  background: #fff; }
+  section .instruction .ins-b {
+    padding: 0 0.5rem 1rem;
+    border-bottom: 0.05rem solid #ededed; }
+    section .instruction .ins-b .ins-b-title {
+      width: 100%;
+      height: 1.1rem;
+      line-height: 1.1rem;
+      font-size: 0.7rem; }
+      section .instruction .ins-b .ins-b-title.r {
+        background: #fc3d3a;
+        color: #fc3d3a; }
+      section .instruction .ins-b .ins-b-title.y {
+        background: #fc9426;
+        color: #fc9426; }
+      section .instruction .ins-b .ins-b-title.g {
+        background: #00c87c;
+        color: #00c87c; }
+      section .instruction .ins-b .ins-b-title .ins--b-title-s {
+        padding: 0 0.75rem;
+        margin-left: 0.15rem;
+        background: #fff;
+        display: inline-block; }
+    section .instruction .ins-b .ins-b-dis {
+      font-size: 0.55rem;
+      color: #a0a0a0;
+      line-height: 1rem; }
+      section .instruction .ins-b .ins-b-dis .ins-b-dis-s {
+        font-size: 0.6rem; }
+section .ins-b-u {
+  margin: 0 0.5rem;
+  display: flex; }
+  section .ins-b-u .ins-b-l {
+    width: 20%;
+    text-align: center; }
+    section .ins-b-u .ins-b-l .ins-b-l-a {
+      width: 100%;
+      display: block;
+      color: #333;
+      line-height: 1.2rem;
+      font-size: 0.8rem;
+      text-decoration: none; }
+      section .ins-b-u .ins-b-l .ins-b-l-a .ins-b-l-m {
+        width: 3.1rem;
+        height: 3.1rem;
+        display: block;
+        margin: 0 auto; }
+section .about {
+  background: #fff; }
+  section .about .about-b .about-b-u {
+    display: flex;
+    position: relative;
+    z-index: 1; }
+    section .about .about-b .about-b-u li {
+      flex: 1;
+      padding: 1rem 0;
+      position: relative; }
+      section .about .about-b .about-b-u li .about-b-m {
+        width: 2.25rem;
+        height: 2.25rem;
+        margin: 0 auto;
+        display: block; }
+      section .about .about-b .about-b-u li.select .about-b-m {
+        width: 2.75rem;
+        height: 2.75rem; }
+      section .about .about-b .about-b-u li.select .lanf {
+        width: 0.5rem;
+        height: 0.5rem;
+        background: #3bafda;
+        position: absolute;
+        bottom: -0.25rem;
+        left: 50%;
+        margin-left: -0.25rem;
+        transform: rotate(45deg); }
+  section .about .about-b .about-b-o {
+    background: #fff;
+    position: relative;
+    z-index: 5;
+    padding: 0.5rem 0;
+    margin: 0 0.4rem;
+    border-top: 0.1rem solid #3bafda; }
+    section .about .about-b .about-b-o li {
+      line-height: 1.5rem;
+      font-size: 0.75rem;
+      display: none; }
+      section .about .about-b .about-b-o li .about-b-a {
+        color: #666;
+        text-decoration: none; }
+      section .about .about-b .about-b-o li.active {
+        display: block; }
+section .youshi {
+  background: #fff; }
+  section .youshi .youshi-b {
+    display: flex; }
+    section .youshi .youshi-b .youshi-b-l {
+      flex: 1;
+      display: block;
+      font-size: 0.8rem;
+      color: #6f6f6f;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1.25rem;
+      margin-bottom: 1.25rem; }
+      section .youshi .youshi-b .youshi-b-l img {
+        width: 3rem;
+        height: 3rem;
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 0.6rem; }
+
+footer {
+  background: #fff; }
+  footer .footer-t {
+    padding: 0.5rem 0.25rem;
+    border-bottom: 0.05rem solid #ededed; }
+    footer .footer-t b {
+      border-left: 0.05rem solid #b299b2;
+      height: 0.5rem;
+      margin-right: 0.25rem; }
+    footer .footer-t .footer-t-a {
+      margin: 0.25rem;
+      display: inline-block;
+      color: #666;
+      text-decoration: none;
+      font-size: 0.4rem;
+      line-height: 0.5rem; }
+  footer .footer-b {
+    text-align: center;
+    font-size: 0.6rem;
+    padding: 0.75rem 0 3rem;
+    line-height: 1rem;
+    color: #999; }
+
+.nav-fixed {
+  display: flex;
+  width: 100%;
+  height: 2.5rem;
+  background: #fff;
+  box-shadow: 0 0.25rem 1.25rem #999;
+  position: fixed;
+  bottom: 0;
+  z-index: 200; }
+  .nav-fixed .nav-fixed-a {
+    display: block;
+    flex: 1; }
+    .nav-fixed .nav-fixed-a .nav-fixed-m {
+      width: 2rem;
+      height: 2rem;
+      margin: 0 auto;
+      display: block;
+      margin-top: 0.25rem; }
+
+/*# sourceMappingURL=xueersi01.css.map */

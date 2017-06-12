@@ -1,0 +1,447 @@
+/**
+ * XESUI
+ * Copyright 2013 xxyys.com All rights reserved.
+ *
+ * @description
+ *
+ * @author Marco (marco@xesui.com)
+ * @modify 2013-07-25 10:54:18
+ * @version $Id$
+ *
+ * @links http://xesui.com
+ */
+
+
+
+/**
+ * @name
+ * @description
+ *
+ * @module
+ * @submodule
+ * @main
+ * @class
+ * @constructor
+ * @static
+ */
+
+//placeholder兼容IE
+(function($) {
+   var placeholderfriend = {
+          focus: function(s) {
+              s = $(s).hide().prev().show().focus();
+              var idValue = s.attr("id");
+              if (idValue) {
+                s.attr("id", idValue.replace("placeholderfriend", ""));
+              }
+              var clsValue = s.attr("class");
+              if (clsValue) {
+                s.attr("class", clsValue.replace("placeholderfriend", ""));
+              }
+          }
+   }
+   //判断是否支持placeholder
+  function isPlaceholer() {
+    var input = document.createElement('input');
+    return "placeholder" in input;
+  }
+  //不支持的代码
+  if (!isPlaceholer()) {
+    $(function() {
+      var form = $(this);
+       //遍历所有文本框，添加placeholder模拟事件
+      var elements = form.find("input[type='text'][placeholder]");
+      elements.each(function() {
+        var s = $(this);
+        var pValue = s.attr("placeholder");
+        var sValue = s.val();
+        if (pValue) {
+          if (sValue == '') {
+            s.val(pValue);
+          }
+        }
+      });
+       elements.focus(function() {
+        var s = $(this);
+        var pValue = s.attr("placeholder");
+        var sValue = s.val();
+        if (sValue && pValue) {
+          if (sValue == pValue) {
+            s.val('');
+          }
+        }
+      });
+       elements.blur(function() {
+        var s = $(this);
+        var pValue = s.attr("placeholder");
+        var sValue = s.val();
+        if (!sValue) {
+          s.val(pValue);
+        }
+      });
+       //遍历所有密码框，添加placeholder模拟事件
+      var elementsPass = form.find("input[type='password'][placeholder]");
+      elementsPass.each(function(i) {
+        var s = $(this);
+        var pValue = s.attr("placeholder");
+        var sValue = s.val();
+        if (pValue) {
+          if (sValue == '') {
+            //DOM不支持type的修改，需要复制密码框属性，生成新的DOM
+            var html = this.outerHTML || "";
+            html = html.replace(/\s*type=(['"])?password\1/gi, " type=text placeholderfriend")
+              .replace(/\s*(?:value|on[a-z]+|name)(=(['"])?\S*\1)?/gi, " ")
+              .replace(/\s*placeholderfriend/, " placeholderfriend value='" + pValue
+              + "' " + "onfocus='placeholderfriendfocus(this);' ");
+            var idValue = s.attr("id");
+            if (idValue) {
+              s.attr("id", idValue + "placeholderfriend");
+            }
+            var clsValue = s.attr("class");
+            if (clsValue) {
+                      s.attr("class", clsValue + "placeholderfriend");
+                    }
+            s.hide();
+            s.after(html);
+           }
+        }
+      });
+       elementsPass.blur(function() {
+        var s = $(this);
+        var sValue = s.val();
+        if (sValue == '') {
+          var idValue = s.attr("id");
+          if (idValue) {
+            s.attr("id", idValue + "placeholderfriend");
+          }
+          var clsValue = s.attr("class");
+          if (clsValue) {
+                  s.attr("class", clsValue + "placeholderfriend");
+                }
+           s.hide().next().show();
+        }
+      });
+     });
+  }
+  window.placeholderfriendfocus = placeholderfriend.focus;
+})(jQuery);
+
+
+
+//复制到剪切板
+function setCopy() {
+ if(xue.isIE){
+     var btn = $('.copy_btn:visible');
+     btn.off('click').on('click', function(){
+         var that = $(this), d = that.data('clipboard-text');
+         window.clipboardData.setData("Text", ''+d+'');
+         alert('已复制到剪贴板');
+     });
+ }else{
+     ZeroClipboard.setDefaults( { moviePath: 'http://www.xxyys.com/flash/ZeroClipboard.swf' } );
+     function copy_handle(client, args) {
+         alert('已复制到剪贴板');
+     }
+     var btn = $('.copy_btn:visible'), _copy = [];
+     btn.each(function(i){
+         var that = this;
+         _copy[i] = new ZeroClipboard(this);
+         _copy[i].on('complete', copy_handle);
+     });
+ }
+}
+
+
+//切换
+function table_qiehuan(d){
+	var that = $(d),
+	box = $('.contentbind').children();
+	that.addClass("current").siblings().removeClass("current");
+	var index =  that.index();
+	box.eq(index).show().siblings().hide();
+}
+
+$(function(){
+	$('.tabs_list li').click(function(){
+	 table_qiehuan(this);
+ });
+//    setCopy();
+});
+
+
+/**
+ * 手机号/用户名验证方法
+ * @param  {string} phoneWarn [设置提示的标签]
+ * @param  {[type]} value     [description]
+ * @return {[type]}           [description]
+ */
+var fCheck = {
+        param : {
+            /* 用于决定图片验证码是否正确之后的操作 */
+            cImg  : 0,
+            cPass : 0
+        },
+        setTips : function(select, tips){
+            /* 设置错误信息 */
+            $(select).css({
+                'background': 'url("../images/warning.png") no-repeat 10px 5px',
+                'padding-left':'32px',
+                'color':'#C00'
+            }).html(tips);
+        },
+        clearTips :function(select){
+            /* 清除错误信息 */
+            $(select).css({
+                'background':'none'
+            }).html(null);
+        },
+        addImg : function(){
+            /* 输入信息错误超过三次 */
+            var imgAdd = '<div class="phone_identifying_k">\
+                            <input id="phone_identifying" name="code" type="text" maxlength = "4"/>\
+                            <label for="phone_identifying" class="phone_identifying_tip">请输入右侧验证码</label>\
+                            <img height="20" width="60" id="btn-identifying" alt="图片验证码"/>\
+                            <span id="" class="label label-warning label-error img-error"></span>\
+                        </div>';
+            $('.userNameLogin').after(imgAdd);
+            fCheck.ImgFunction();
+        },
+		ImgFunction: function(){
+			/* 图片验证的处理(需要在插入html之后才能绑定事件) */
+            $('#phone_identifying').on('focus',function(){
+                $('.phone_identifying_tip').hide();
+                fCheck.clearTips('.img-error');
+            });
+            $('#phone_identifying').on('blur',function(){
+                var value = $(this).val();
+                if(value){
+                    $('.phone_identifying_tip').hide();
+                }else{
+                    $('.phone_identifying_tip').show();
+                    fCheck.setTips('.img-error','请输入右侧验证码');
+                }
+            });
+            /* 点击图片则改变验证码图片 */
+            $('#btn-identifying').on('click',function(){
+                fCheck.changeVerificationImg("btn-identifying");
+            });
+            fCheck.changeVerificationImg("btn-identifying");
+		},
+        changeVerificationImg : function (imgId) {
+            /* 改变验证码图片 */
+            var newVerificationImg = '/Verifications/show?' + fCheck.generateMixed(12);
+            $('img[id="' + imgId + '"]').attr('src', newVerificationImg);
+        }
+        ,
+        generateMixed: function (n) {
+            /* 随机生成数，用于随机获取图片 */
+            var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            var res = "";
+            for (var i = 0; i < n; i++) {
+                var id = Math.ceil(Math.random() * 35);
+                res += chars[id];
+            }
+            return res;
+        },
+        imgcode : function(v,imgwarn) {
+            /* 客户端验证图片验证码 */
+            fCheck.clearTips(imgwarn);
+            if (v == '') {
+                fCheck.setTips(imgwarn,'请输入右侧验证码');
+                fCheck.param.cImg = 0;
+            }else if(/^\w{4}$/.test(v)){
+                /* 调用ajax取值 */
+                fCheck.param.cImg = 1;
+
+            }else{
+                fCheck.setTips(imgwarn,'请输入正确的验证码');
+                fCheck.param.cImg = 0;
+            }
+        },
+        userCheck :function  (phoneWarn,value,passWarn){
+            /* 验证手机号码 */
+	      	fCheck.userCheckAjax(phoneWarn,passWarn);
+
+        },
+        passCheck :function(passWarn,passVal){
+            /* 客户端简单验证密码不为空 */
+          if( passVal=='' || passVal=='请输入密码' ){
+                fCheck.setTips(passWarn,"请输入密码");
+                fCheck.param.cPass = 0;
+          }else if(passVal.length < 6){
+				fCheck.setTips(passWarn,"密码必须大于6位");
+                fCheck.param.cPass = 0;
+          }else{
+			   fCheck.param.cPass = 1;
+		  }
+
+        },
+        userCheckAjax:function(phoneWarn,passWarn){
+            var value = 0;
+            if($('#phone_identifying').length > 0){
+                value = $('#phone_identifying').val();
+            }
+			     /* 服务端验证账户与密码是否匹配 */
+           $.ajax({
+            type:"POST",
+            url: indexUrl + "/OpenLogin/login",
+            dataType: "json",
+			data: 'username=' + encodeURIComponent($('#inputUserName').val())+'&password='+ encodeURIComponent($('#inputPassWord').val()) + '&verifyCode=' + value + '&deviceType='+ $('#deviceType').val(),
+            timeout: 7000,
+            success: function(result) {
+              if(result.sign == 1){
+                /* 输入正确 */
+                window.location.href= result.msg;
+              }else if(result.sign != 1){
+      				  if(result.sign == -1) {
+      						fCheck.changeVerificationImg("btn-identifying");
+      					}
+                /* 用户名正确，密码错误提示 */
+		            fCheck.setTips(phoneWarn,result.msg);
+              }
+              if(result.isVerifyCode){
+                /* 账号密码输入错误三次错误提示 */
+                if(!($('#phone_identifying').length > 0))
+                    fCheck.addImg();
+              }
+              $('#login_submit').removeClass('login-use')
+            },
+            error: function() {
+                $('#login_submit').removeClass('login-use')
+              window.location.reload();
+              return false;
+            }
+          });
+        }
+    };
+
+/* 账号输入验证账号添加验证码 */
+$('#inputUserName').on('focus',function(){
+    fCheck.clearTips('.user-error');
+});
+
+$('#inputUserName').on('blur',function(){
+    var user = $('#inputUserName'),
+    userVal = user.val();
+    if(!userVal){
+        fCheck.setTips('.user-error','请输入手机号/用户名');
+    }
+});
+
+$('#inputPassWord').on('focus',function(){
+    fCheck.clearTips('.pass-error');
+});
+
+$('#inputPassWord').on('blur',function(){
+    var that = this,
+    value = $(that).val();
+    if(!value){
+      fCheck.setTips('.pass-error','请输入密码');
+    }
+
+});
+
+
+// 登录验证
+$('#login_submit').off('click').on('click', function() {
+
+    var user = $('#inputUserName'),
+    pass = $('#inputPassWord'),
+    userVal = user.val(),
+    passVal = pass.val();
+
+    fCheck.clearTips('.user-error');
+    fCheck.clearTips('.pass-error');
+    fCheck.clearTips('.img-error');
+
+    if((userVal == '') || (userVal == '请输入手机号/用户名')){fCheck.setTips('.user-error','请输入手机号/用户名');}
+    if((passVal == '') || (passVal == '请输入密码')){fCheck.setTips('.pass-error','请输入密码');}
+    if($('#phone_identifying').length > 0){
+        var value = $('#phone_identifying').val();
+        fCheck.imgcode(value,'.img-error');
+    }
+
+    /* 验证时分成有图片验证码以及没有图片验证码两种情况 */
+    if(userVal){
+        
+        fCheck.passCheck('.pass-error',passVal);
+        /* 包含</script或者<\/script替换掉< */
+        userVal = userVal.replace(/(<|<\/)script/g,'script');
+    	passVal = passVal.replace(/(<|<\/)script/g,'script');
+
+        var nUsing = !($('#login_submit').hasClass('login-use'));
+        if($('#phone_identifying').length > 0){
+            /* 当图片服务端验证正确以及密码客户端验证格式正确才会检验账号和密码是否匹配 */
+
+            if(fCheck.param.cPass && fCheck.param.cImg && nUsing){
+                $('#login_submit').addClass('login-use');
+                fCheck.userCheck('.user-error',userVal,'.pass-error');
+            }
+        }else{
+            if(fCheck.param.cPass && nUsing){
+                $('#login_submit').addClass('login-use');
+                fCheck.userCheck('.user-error',userVal,'.pass-error');
+            }
+        }
+    }
+    return false;
+});
+
+$('#entry').on('keydown',function(e){
+  if(e.keyCode == 13){
+        var user = $('#inputUserName'),
+    pass = $('#inputPassWord'),
+    userVal = user.val(),
+    passVal = pass.val();
+
+    fCheck.clearTips('.user-error');
+    fCheck.clearTips('.pass-error');
+    fCheck.clearTips('.img-error');
+
+    if((userVal == '') || (userVal == '请输入手机号/用户名')){fCheck.setTips('.user-error','请输入手机号/用户名');}
+    if((passVal == '') || (passVal == '请输入密码')){fCheck.setTips('.pass-error','请输入密码');}
+    if($('#phone_identifying').length > 0){
+        var value = $('#phone_identifying').val();
+        fCheck.imgcode(value,'.img-error');
+    }
+
+    /* 验证时分成有图片验证码以及没有图片验证码两种情况 */
+    if(userVal){
+        fCheck.passCheck('.pass-error',passVal);
+
+        /* 包含</script或者<\/script替换掉< */
+        userVal = userVal.replace(/(<|<\/)script/g,'script');
+    	passVal = passVal.replace(/(<|<\/)script/g,'script');
+
+        var nUsing = !($('#login_submit').hasClass('login-use'));
+        if($('#phone_identifying').length > 0){
+            /* 当图片服务端验证正确以及密码客户端验证格式正确才会检验账号和密码是否匹配 */
+
+            if(fCheck.param.cPass && fCheck.param.cImg && nUsing){
+                $('#login_submit').addClass('login-use');
+                fCheck.userCheck('.user-error',userVal,'.pass-error');
+            }
+        }else{
+            if(fCheck.param.cPass && nUsing){
+                $('#login_submit').addClass('login-use');
+                fCheck.userCheck('.user-error',userVal,'.pass-error');
+            }
+        }
+    }
+    return false;
+  }
+});
+!function(){
+	fCheck.ImgFunction();
+}();
+window.onload = function(){
+	$('#inputUserName').val('');
+    $('#inputPassWord').val('');
+    if($('#phone_identifying').length > 0){
+        $('#phone_identifying').val('');
+    }
+    var account = $.cookie('XESaccount');
+    if(account){
+        $('#inputUserName').val(account);
+    }
+};

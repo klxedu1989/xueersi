@@ -1,0 +1,68 @@
+﻿    function  utrack(account,bz) {
+    //alert(bz);
+    var params = {};
+    //Document对象数据
+    if(document) {
+    params.domain = document.domain || '';
+    params.url = document.URL || '';
+  //  params.title = document.title || '';
+    params.referrer = document.referrer || '';
+   
+    params.cookie= document.cookie || '';
+    }
+    //Window对象数据
+    if(window && window.screen) {
+    params.sh = window.screen.height || 0;
+    params.sw = window.screen.width || 0;
+    params.cd = window.screen.colorDepth || 0;
+    }
+    //navigator对象数据
+    if(navigator) {
+    params.lang = navigator.language || '';
+
+    params.appname = navigator.appName || '';
+    params.appversion =navigator.appVersion || '';
+    params.appcodename =navigator.appCodeName || '';
+    params.useragent = navigator.userAgent || '';
+    }
+  
+    params.account=account
+    params.bz=bz
+     
+    //拼接参数串
+    var args = '';
+    for(var i in params) {
+    if(args != '') {
+    args += '&';
+    }
+    args += i + '=' + encodeURIComponent(params[i]);
+    }
+    //alert(args) ;
+    //通过Image对象请求后端脚本
+    //var img = new Image(1, 1);
+    //img.src = 'http://192.168.59.70:8800/1.gif?' + args;
+ //   curl http://192.168.59.70:8800/1.gif?args;
+
+   //  发送get请求，并异步处理
+//xmlHttp = createXMLHttpRequest();
+//var url = 'http://netlog.xesv5.com:8800/2.gif?'+args;
+var timestamp = (new Date()).valueOf();
+var img= new Image(1, 1);
+img.src=('https:' == document.location.protocol ? 'https://netlog.xesimg.com' : 'http://netlog.xesv5.com')+'/2.gif?times='+timestamp+'&'+args;
+//img.src='http://netlog.xesv5.com/2.gif?times='+timestamp+'&'+args;
+//xmlHttp.open("GET", url, true);// 异步处理返回
+//xmlHttp.onreadystatechange = callback;
+//xmlHttp.send(null);
+//alert('ok');
+    }
+
+
+    function createXMLHttpRequest() {
+var xmlHttp;
+if (window.XMLHttpRequest) {
+xmlHttp = new XMLHttpRequest();
+if (xmlHttp.overrideMimeType)
+xmlHttp.overrideMimeType('text/xml');
+} else if (window.ActiveXObject) {try {xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+} catch (e) {try {xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+} catch (e) {}}}return xmlHttp;}

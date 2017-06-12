@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en" style="font-size:20px">
+<head>
+    <meta charset="UTF-8">
+    <title>登录-欢迎来到学而思网校</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,user-scalable=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script> 
+    <style>
+        body{
+            background: url('img/login-liuyi-bg.png') no-repeat;
+        }
+        body,ul,li,a,input,h1{
+            margin:0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+            outline: none;
+            color: #333;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+        .fl{
+            float:left;
+        }
+        .fr{
+            float:right;
+        }
+        .clearfix:after{
+            clear:both;
+            content:'';
+            display:block;
+        }
+        .clearfix{
+            zoom:1
+        }
+        .xue{
+            height: 2.6rem;
+            background: #fff;
+            box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .logo-center{
+            width: 56rem;
+            padding-top: 0.5rem;
+            margin:0 auto;
+        }
+        .logo_passport{
+            display: inline-block;
+            width: 8.15rem;
+            height: 1.5rem;
+            background: url('img/logo_new.png') no-repeat;
+            margin-right: 0.9rem;
+            border-right: 0.05rem #D9D9D9 solid;
+            text-indent: -9999px;
+        }
+        .logo-go{
+            display: none;
+        }
+        .logo-tips{
+            display: inline-block;
+            width: 9.5rem;
+            height: 1.6rem;
+            font-size:1rem;
+            position: relative;
+            top:-0.2rem;
+        }
+
+        .banner-center{
+            margin-top:1.75rem;
+            margin-left:2.5rem;
+        }
+        .entry-right{
+            width: 17rem;
+            position: absolute;
+            padding: 1rem 0 0 1rem;
+            margin: 1.5rem 2rem 1rem 0;
+            background: #fff;
+            border-radius: 0.15rem;
+            height: 22rem;        
+            right:0;
+            top:2rem;
+            z-index:100;
+        }
+        .input-text{
+            width: 15rem;
+            height: 2.5rem;
+            line-height: 1.25rem;
+            border: 0.05rem #e6e6e6 solid;
+            padding: 0.5rem 0.6rem;
+            border-radius: 0.15rem;
+        }
+        input[type=button]{
+            width: 15rem;
+            height: 2.5rem;
+            background-color: #f75e5a;
+            border:none;
+            font-size:0.8rem;
+            color: #fff;
+            border-radius: 0.15rem;
+            cursor: pointer;
+        }
+        input[type=button]:hover{
+            background: #e46a67;
+        }
+        .warning{        
+            padding-left: 1.6rem;
+            color: rgb(204, 0, 0);
+            display: block;
+            width: 100%;
+            height: 1.4rem;
+            line-height: 1.4rem;
+        }
+        .active{
+            background: url(img/warning.png) 0.5rem 0.25rem no-repeat;
+        }
+        .forget_password{
+            display: block;
+            width: 100%;
+            text-align: right;
+            padding:0.5rem 1.75rem 0.5rem 0;
+            color: #999;
+            font-size:0.6rem;        
+        }
+        .forget_password:hover{
+            color: #999;
+        }
+        .space-28{
+            display: none;
+        }
+        .mian[type=button]{
+            display: none;
+        }
+        .mianx[type=button]{
+            background: #fff;
+            border: 0.05rem #e5e5e5 solid;
+            color: #666;
+            display: block;
+        }
+        .mianx[type=button]:hover{
+            background: #eee;
+        }
+        .others{
+            display: block;
+        }
+        .others-span{
+            display: block;
+            font-size:0.6rem;
+            color: #666;
+            margin-top:0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .login{
+            display: flex;
+        }
+        .login-a{
+            display: inline-block;
+            flex:1;
+            margin:0.5rem 2.25rem 1rem 0;
+            width: 3rem;
+            font-size:0.6rem;
+            padding-top: 2rem;
+            color: #666;
+            text-align: center;
+            height: 2rem;
+        }
+        .login-a:hover{
+            color: #666;
+        }
+        .login-a1{
+            background: url('img/applogo (1).png') no-repeat 8px;
+        }
+        .login-a2{
+            background: url('img/applogo (1).png') no-repeat -80px;
+        }
+        .login-a3{
+            background: url('img/applogo (1).png') no-repeat -245px;
+        }
+        footer{
+            text-align: center;
+            font-size:0.6rem;
+            color: #000;
+            line-height: 1.4rem;
+            margin-top:2.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-t-a{
+            display: inline-block;
+            padding: 0 0.25rem;
+            color: #333;
+        }        
+        .footer-t-a:hover{
+            color:#333;
+            text-decoration: underline;
+        }
+        .footer-t-a:nth-child(10){
+            color:#cc0000;
+        }
+        .footer-t-line{
+            border-left:0.05rem solid #333;
+            padding-right:0.25rem;
+        }
+        @media (max-width: 770px) {
+            body{
+                background: #fff;
+            }
+            #xue-logo{
+                box-shadow: 0.1rem -0.2rem 0.4rem #666;
+                height: 2.6rem;
+                background: #fff;
+                overflow: hidden;
+                padding-bottom: 0.5rem;
+                text-align: center;
+                color: #333;
+                font-size: 1rem;
+                padding-top: 0.75rem;
+                width: 100%;
+                line-height: 1rem;
+                background: #fff;
+
+            }
+            .logo-center{
+                width: 100%;
+            }
+            .logo_passport{
+                display: none;
+            }            
+            .logo-go{
+                display: inline-block;
+                float:left;
+                color: #333; 
+                line-height: 0.25rem;              
+            }
+            .logo-tips{
+                display: inline-block;
+                width: 100%;
+                position: relative;
+                top:-0.7rem;
+            }
+            .banner{
+                background: #fff;
+            }
+            .banner-center{
+                display: none;
+            }
+            .entry-right{
+                width: 100%;
+                background: #fff;
+                position: relative;
+                padding: 1rem 0.25rem 0 0.25rem;
+                width: 95%;
+                margin:0 auto;
+                top:0;
+            }
+            .input-text{
+                width: 100%;
+            }
+            input[type=button]{
+                width: 100%;
+            }
+            .forget_password{
+                width: 100%;
+            }
+            .space-28{
+                width: 100px;
+                height: 1.4rem;
+                display: block;
+            }
+            .mian[type=button]{
+                background: #fff;
+                border: 0.05rem #e5e5e5 solid;
+                color: #666;
+                display: block;
+            }
+            .mian[type=button]:hover{
+                background: #eee;
+            }
+            .mianx[type=button]{
+                display: none;
+            }
+            .others{
+                display: none;
+            }
+            footer{
+                display: none;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="xue-logo" class="xue">
+            <div class="logo-center ">  
+                <a href="javascript:;" class="logo_passport" id="logo_passport"></a> 
+                <a href="course.html" class="logo-go">&lt;</a> 
+                <span class="logo-tips">欢迎登录</span>
+
+            </div>
+        </h1>
+    </header>
+    <section>       
+        <div class="logo-center " style="position:relative">
+            <img src="img/login-liuyi-pic.png" alt="" class="banner-center">
+            <div class="entry-right">
+                <input type="text" class="input-text" id="inputUserName" placeholder="请输入手机号/用户名">
+                <span class="warning" id="s1"></span>
+                <input type="password" class="input-text" id="password" placeholder="请输入密码">
+                <span class="warning" id="s2"></span>
+                <input type="button" value="立即登录" id="login-btn">
+                <div class="space-28"></div>
+                <input type="button" value="免费注册" class="mian" id="mian">
+                <a href="http://account.xueersi.com/Find" class="forget_password" id="forget_password">忘记密码?</a>
+                <input type="button" value="注册网校账号" class="mianx" id="mianx">
+                <div class="others">
+                    <span class="others-span">其它方式登录</span>
+                    <div class="login">
+                        <a href="https://login.xueersi.com/Login/getLoginKey/3/" class="login-a login-a1" id="qqlogin">QQ登录</a>
+                        <a href="https://login.xueersi.com/Login/getLoginKey/2/" class="login-a login-a2" id="weibologin">微博登录</a>
+                        <a href="https://login.xueersi.com/Login/getLoginKey/1/" class="login-a login-a3" id="homelogin">家长帮登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </section>
+    <footer>
+        <div class="footer-t">
+            <span>北京学而思教育科技有限公司 地址：北京市海淀区中关村大街18号科贸中心7层</span>
+            <a href="http://www.xueersi.com/" class="footer-t-a">网站首页</a>
+            <span class="footer-t-line"></span>
+            <a href="http://www.xueersi.com/article/detail/1903" class="footer-t-a">关于我们</a>
+            <span class="footer-t-line"></span>
+            <a href="http://www.xueersi.com/article/detail/1220" class="footer-t-a">合作专区</a>
+            <span class="footer-t-line"></span>
+            <a href="http://www.xueersi.com/article/detail/1538" class="footer-t-a">联系我们</a>
+            <span class="footer-t-line"></span>
+            <a href="http://www.xueersi.com/article/detail/1495" class="footer-t-a">版权声明</a>
+            <span class="footer-t-line"></span>
+            <a href="http://www.xueersi.com/article/" class="footer-t-a">帮助中心</a>
+        </div>
+        <div class="footer-m">
+            <span>Copyright © 2009-2017 www.xueersi.com All Rights Reserved 京ICP备09032638号</span>
+            <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020171" class="footer-t-a"><img src="img/jgwab.png" alt=""> 京公网安备 11010802020171号</a>
+        </div>
+        <div class="footer-b">
+            <a href="https://credit.cecdc.com/CX20120925001738002003.html"><img src="img/13487953879693.png" alt=""></a>
+        </div>
+    </footer>
+</body>
+</html>
+<script>
+    var oT1 = $('#inputUserName');
+    var oT2 = $('#password');
+    var oBtn = $('#login-btn');
+    var oS1 = $('#s1');
+    var oS2 = $('#s2');
+    var oMian = $('#mian');
+    var oMianX = $('#mianx');
+    var oLogo = $('#logo_passport');
+    var oForget = $('#forget_password'); 
+    // console.log(oT1);
+    oBtn.click(function(){
+        var user = oT1.val();
+        var pass = oT2.val();
+        var regTel = /^1[34875][0-9]{9}$/;
+        var regUser = /^\w{6,}$/;
+        var regPass = /^[0-9a-zA-Z]{6,10}$/;
+        if((regTel.test(user) ||regUser.test(user))&& regPass.test(pass) ){
+            window.location.href ='#';
+            $.ajax({
+                url:'/login',
+                data:{
+                    user:user,
+                    pass:pass
+                }
+                }).then(function (res){
+                    console.log(res);
+                    var json = eval('('+res+')');
+                    alert(json.msg);
+
+                },function(){
+                    alert('网络联接失败')
+                })
+        }else{
+            return;
+        }
+        
+    })
+    oT1.blur(function(){
+        if(oT1.val()==''){
+            oS1.addClass('active');
+            oS1.html('请输入手机号/用户名');           
+        }else{
+            oS1.removeClass('active');
+            oS1.html('');
+        }
+    })
+    oT2.blur(function(){
+        if(oT2.val()==''){
+            oS2.addClass('active');
+            oS2.html('请输入密码');
+        }else{
+            oS2.removeClass('active');
+            oS2.html('');
+        }
+    })
+    oMian.click(function(){
+        window.location.href = 'https://reg.xueersi.com/reg/aHR0cDovL3RvdWNoLnh1ZWVyc2kuY29tL21l';
+    })
+    oMianX.click(function(){
+        window.location.href = 'https://reg.xueersi.com/reg/aHR0cDovL3RvdWNoLnh1ZWVyc2kuY29tL21l';        
+    })
+    oLogo.click(function(){
+        window.location.href ='http://www.xueersi.com/';
+    })
+    oForget.click(function(){
+        window.location.href ='http://account.xueersi.com/Find';
+    })
+
+    
+</script>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,
+	maximum-scale=1.0,user-scalable=no">
+	<title>选课程-欢迎来到学而思网校</title>
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/course.css">
+	<script type="text/javascript" src="./js/jquery-3.1.0.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.js"></script>
+	<script type="text/javascript" src="./js/vue2.js"></script>
+	<script type="text/javascript" src="./js/vue-resource.js"></script>
+	<script type="text/javascript" src="./js/course.js"></script>
+	<script type="text/javascript">
+		window.onload=window.onresize=function(){
+			document.documentElement.style.fontSize=document.documentElement.clientWidth*20/320+'px';
+		}
+	</script>
+</head>
+<body>
+	<header class="clearfix">
+		<a href="index.html" class="fl">&lt;</a>
+		初一/选课程
+	</header>
+
+	<section class="select">
+		<ul>
+			<li class="fl">初一
+				<span class="glyphicon glyphicon-menu-down"></span>
+				<em></em>
+			</li>
+			<li class="fl subject">学科
+				<span class="glyphicon glyphicon-menu-down"></span>
+				<em></em>
+			</li>
+			<li class="fl">排序
+				<span class="glyphicon glyphicon-menu-down"></span>
+				<em></em>
+			</li>
+		</ul>
+		<ol>
+			<li class="clearfix">
+				<div class="fl">
+					<a href="javascript:;">幼升小</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">一年级</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">二年级</a>
+				</div>
+				<div class="fl four">
+					<a href="javascript:;">三年级</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">四年级</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">五年级</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">六年级</a>
+				</div>
+				<div class="fl four">
+					<a href="javascript:;">初一</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">初二</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">初三</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">高一</a>
+				</div>
+				<div class="fl four">
+					<a href="javascript:;">高二</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">高三</a>
+				</div>
+			</li>
+			<li class="clearfix">
+				<div class="fl">
+					<a href="javascript:;">全部</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">语文</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">数学</a>
+				</div>
+				<div class="fl four">
+					<a href="javascript:;">英语</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">物理</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">科学</a>
+				</div>			
+			</li>
+			<li class="clearfix">
+				<div class="fl">
+					<a href="javascript:;">综合排序</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">销量排序</a>
+				</div>
+				<div class="fl">
+					<a href="javascript:;">价格升高</a>
+				</div>
+				<div class="fl four">
+					<a href="javascript:;">价格降低</a>
+				</div>			
+			</li>
+		</ol>
+	</section>
+
+	<section class="chinese container">
+		<div id="box">
+			<ul>
+				<li class="clearfix" v-for="v in arr1">
+					<div class="fl img">
+						<a href="javascript:;">
+							<img :src="v.src"/>
+						</a>
+					</div>
+					<div class="fl mandarin ">
+						<div class="mandarin-head">
+							<div class="language ">{{v.book}}</div>
+							<div class="record ">{{v.record}}</div>
+							<span class="">{{v.common}}</span><br/>
+						</div>
+						<p>
+							起止日期：
+							<i>{{v.a2}}</i>
+						</p>
+						<p class="course-teacher">
+							授课老师:
+							<i>
+								<a href="javascript:;">{{v.teacher}} &nbsp;</a>
+								{{v.buyed}}<em> &nbsp;{{v.buy}}</em>
+							</i>
+						</p>
+						<div class="course-price">{{v.price}}</div>
+					</div>				
+				</li>
+			</ul>
+			<input type="button" name="" value="查看更多" @click="get()"/>
+		</div>
+	</section>
+
+	<footer>
+		<div class="clearfix login">
+			<div class="fl">
+				<a href="javascript:;">登录</a>
+				<span></span>
+				<a href="javascript:;">注册</a>
+			</div>
+			<div class="fr">
+				<a href="javascript:;">客户端</a>
+				<span></span>
+				<a href="javascript:;">关于我们</a>
+			</div>
+		</div>
+		<div class="usa">
+			<div>
+				<span>Copyright © 2009-2017 www.xueersi.com </span>
+				<span>美国纽交所上市教育公司：TAL</span>
+			</div>
+		</div>
+	</footer>
+
+	<div class="nav">
+		<ul>
+			<li>
+				<a href="index.html">
+					<img src="./img/xue-menu_home.jpg">
+				</a>
+			</li>
+			<li>
+				<a href="class-select.html">
+					<img src="./img/xue-menu_point2.jpg">
+				</a>
+			</li>
+			<li>
+				<a href="听讲座.html">
+					<img src="./img/xue-menu_live.jpg">
+				</a>
+			</li>
+			<li>
+				<a href="course.html">
+					<img src="./img/xue-menu_copy_current2.jpg">
+				</a>
+			</li>
+			<li>
+				<a href="ours.html">
+					<img src="./img/xue-menu_me.jpg">
+				</a>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

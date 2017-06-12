@@ -1,0 +1,387 @@
+//老师头像自动换
+function showTeacherAvatar() {
+      var $teacherImgs = $('.media .media-avatar');
+      $teacherImgs.each(function(){
+        var $teacherHead = $(this).find('.thead-avatar');
+        var len = $teacherHead.length;
+        if(len>1){
+          $teacherHead.eq(0).show().siblings().hide();
+          //$teacherHead.css('display','none');
+           var index =0;
+          adTimer = setInterval(function(){
+            $teacherHead.eq(index).show().siblings().hide();
+            index++;
+            if(index == len){index=0;}
+          },3000);
+        }
+      })
+}
+
+//返回上一页
+function goback(){
+     history.go(-1);
+}
+
+
+
+/*
+ * @description 轮播
+ */
+! function(ze) {
+    ze.fn.slider = function(obj) { //添加zepto插件入口
+        var tnum = 0, //初始化listyle序号
+            distance = 0, //轮播图序号
+            signNum = 0, //下边小圆点标示序号
+            timer = null, //定时器
+            x1 = 0,
+            y1 = 0,
+            x2 = 0,
+            y2 = 0,
+            swipeX = 0, //滑动x轴距离
+            swipeY = 0, //滑动y轴距离
+            mixDir = 50, //最小swipe值，若大于就下一张，否则图片不轮播
+            animateTime = 0.3, //动画时长
+            mod = ze(this), //轮播外层div容器
+            param = ze.extend({}, { //参数
+                    ul: mod.children("ul"),
+                    li: mod.children().children("li"),
+                    sign: mod.children("div").children('ol').children('li'),
+                    autoSwipe: !0, //自动轮播
+                    speed: 4000, //时间 ---可设置
+                    axisX: !0, //水平或者垂直滚动
+                    transitionType: "ease" //轮播图片运动模式（贝塞尔曲线运动）---可设置
+                },
+                obj || {}),
+            liWidth = param.li.width(),
+            liHeight = param.li.height(),
+            liLength = param.li.length,
+            callback = callback || function() {},
+            cloneFirst = null,
+            cloneLast = null,
+            then = null,
+            now = null
+
+        function getSize() { //取得li的size
+            liWidth = param.li.width()
+            liHeigth = param.li.height()
+        }
+
+        function ulAnimateInit(ul, time) { //初始化ul的style
+            ul.css({
+                "-webkit-transition": "all " + time + "s " + param.transitionType,
+                transition: "all " + time + "s " + param.transitionType,
+                //height: liHeight + 'px'     //第一个li的position设置为relative，便能撑开父元素，所以不用设置高度，解决手机有时候算不出高度的问题
+            })
+            // alert(liHeight)
+        }
+
+        function direction(ul, dis) { //1、初始化li的style; 2、运动设置距离参数
+            param.axisX ? ul.css({
+                '-webkit-transform': 'translate3d(' + dis + 'px,0,0)',
+                transform: 'translate3d(' + dis + 'px,0,0)'
+            }) : ul.css({
+                '-webkit-transform': 'translate3d(0,' + dis + 'px,0)',
+                transform: 'translate3d(0,' + dis + 'px,0)'
+            })
+        }
+
+        function liInit(time) { //初始化ul、li入口
+            var num = 0
+            ulAnimateInit(param.ul, time);
+            param.li.each(function() {
+                var dis = param.axisX ? num * liWidth : num * liHeight
+                direction(ze(this), dis)
+                num += 1
+            });
+            
+            cloneLast == null ? (cloneLast = param.li.last().clone(),param.ul.append(cloneLast)) : cloneLast = cloneLast //循环轮播需要复制一个末尾li，定位在第一个li前边;复制一个首li放在末尾li后边
+            cloneFirst == null ? (cloneFirst = param.li.first().clone(),param.ul.append(cloneFirst)) : cloneFirst = cloneFirst
+            // if (cloneFirst == null) {
+            //     param.ul.append(cloneLast)
+            //     param.ul.append(cloneFirst); //第一张图前加一张最后一张图的克隆，最后一张后面加一张第一张图的克隆 
+            // }
+            direction(cloneLast, -liWidth)
+            direction(cloneFirst, (num) * liWidth) //当视窗锁定第一张图的克隆时，内部切换到第一张原图;同理最后一张图克隆
+        }
+
+        function move(time) { //运动函数--多用于需要将ul translation 0s 的情况
+            ulAnimateInit(param.ul, time);
+            param.axisX ? direction(param.ul, distance * liWidth) : direction(param.ul, distance * liHeight)
+        }
+
+        function autoMove() { //自动轮播函数
+            if (param.autoSwipe) {
+                timer = setInterval(function() {
+                    changePic(1) //参数1为向左侧滚动
+                }, param.speed)
+            }
+        }
+
+        function changePic(dir) { //改变图片，dir决定左滚右滚
+            dir ? distance-- : distance++;
+            signNum = Math.abs(distance)
+            move(animateTime)
+            changeDot(distance)
+            Math.abs(distance) < liLength ? (distance >= 1 ? setTimeout(function() { //判断图片序号，若此时为clone的li，序号变为最后一个非clone的li的序号，
+                distance = -liLength + 1;
+                move(0)
+            }, animateTime * 1000) : distance = distance) : setTimeout(function() { //若大于总个数，序号变为1，定位到clone的li          
+                distance = 0
+                move(0)
+            }, animateTime * 1000)
+        }
+
+        function startSite(e) { //取得touch时间x1，y1
+            x1 = e.touches[0].pageX
+            y1 = e.touches[0].pageY
+        }
+
+        function touchAtrr(e) { //兼容touch事件 e.touch数组  
+            e.touches || (e.touches = e.originalEvent.touches)
+        }
+
+        function touch(e) { //move事件中图片跟随手势滚动
+            e.preventDefault()
+            clearInterval(timer)
+            timer = null
+            x2 = e.touches[0].pageX
+            y2 = e.touches[0].pageY
+            swipeX = x2 - x1
+            swipeY = y2 - y1
+            // console.log('x1:' + x1);
+            // console.log('x2:' + x2);
+            // console.log('sx:' + swipeX);
+            ulAnimateInit(param.ul, 0)
+            // if (swipeX > 0) {
+            //     distance == 1 ? distance = -liLength + 1 : distance = distance
+            // } else {
+            //     distance == -liLength + 1 ? 1 : distance = distance
+            // }
+            // console.log('dis:'+distance)
+            move(0)
+            direction(param.ul, liWidth * distance + swipeX)
+        }
+
+        function touched() { //手指离开触屏判断时候滚到下一张或回滚
+            then = Date.now()
+            Math.abs(swipeX) <= mixDir ? move(animateTime) : (swipeX < 0 ? changePic(1) : changePic(0))
+            swipeX = 0
+            swipeY = 0
+            if(timer == null){
+              autoMove()
+            }  
+        }
+
+        function changeDot(dis) { //下方点序号跟随变化
+            var index = dis == 1 ? Math.abs(-liLength + 1) : (dis == -liLength ? 0　 : Math.abs(dis))
+            param.sign.eq(index).addClass('current').siblings().removeClass('current')
+        }
+        liInit(animateTime)
+        autoMove()
+        mod.on("touchstart", function(e) {
+            touchAtrr(e)
+            startSite(e)
+        });
+        mod.on("touchmove", function(e) {
+            touchAtrr(e)
+            now = Date.now()
+            if(then == null || (now - then > 600)){
+                touch(e)
+            }
+        });
+        mod.on("touchend", function() {
+            now = Date.now()
+            if(then == null || (now - then > 600)){
+                touched()
+            }
+        })
+        ze(window).on('resize',function(){
+          liWidth = param.li.width()
+          liInit(animateTime)
+        })
+    }
+}(window.Zepto)
+  //tabs切换效果
+ function tabs(e){
+              $(e).addClass('select').siblings().removeClass("select");
+               var index =  $(e).index(); 
+               var tabItem= $(e).parents('.choice_title').next().find('.tabItem');
+               tabItem.eq(index).show().siblings().hide();
+           } 
+
+/*首页老师tab*/
+$(function(){
+   function onloadTabs(){
+        var t = $('.app_course_grade li.select'),
+            i = t.index();
+         var tabItem= t.parents('.choice_title').next().find('.tabItem');
+            tabItem.eq(i).show().siblings().hide();  
+        
+   }
+   onloadTabs();
+  //首页
+    $('body').on('tap','.titleTab', function(){
+        tabs(this);
+    });
+    $('body').on('tap','.titleTab_cur', function(){
+        tabs(this);
+    });
+  $('body').on('tap','.titleTab_free', function(){
+        tabs(this);
+    });
+  //用于课程详情页
+  $('body').on('tap','.titleTabDetails', function(){
+        tabs(this);
+    });
+  //首页---年级
+  $('body').on('click','.app_course_grade li', function(){
+        tabs(this);
+    });
+   //首页---学员这样说
+  $('body').on('click','.student_talk li', function(){
+        tabs(this);
+    });
+   //老师详情页--直播录播课切换
+  $('body').on('tap','.teacher-coures-list-nav li', function(){
+        tabs(this);
+    });
+});
+ /*选课程页的选择年级的tab*/
+$(function(){
+      var UA =window.navigator.userAgent;
+      var CLICK='click';
+      if(/ipad|iphone|android/.test(UA)){CLICK="tap";}
+      var $titleTabs =$('.find-title .title-tab');
+      var $floatTitle= $('.float-title');
+      var $clickTitle = $floatTitle.find('.classification .nav_link');
+          $titleTabs[CLICK](function(){
+            if($(this).hasClass('select')){
+              $(this).removeClass('select');
+              $floatTitle.hide();
+              return
+            }
+            $(this).addClass('select').siblings().removeClass("select");
+            var index =  $titleTabs.index(this);
+            $floatTitle.eq(index).show().siblings().hide();
+       });
+         $clickTitle[CLICK](function(){
+            $(this).addClass('selected').siblings().removeClass('selected');
+            $(this).parent().parent().siblings().find('.nav_link').removeClass('selected');
+         }); 
+})
+//首页倒计时
+function updateEndTime(boxs) {
+    var box = $(boxs);
+    if (box.length === 0) {
+        return false;
+    }
+    var date = new Date();
+    var time = date.getTime(); //当前时间距1970年1月1日之间的毫秒数
+    box.each(function(i) {
+        var endDate = this.getAttribute("endTime"); //结束时间字符串
+        //转换为时间日期类型
+        if(endDate){
+                var endDate1 = eval('new Date(' + endDate.replace(/\d+(?=-[^-]+$)/, function(a) {
+                    return parseInt(a, 10) - 1;
+                }).match(/\d+/g) + ')');
+                var endTime = endDate1.getTime(); //结束时间毫秒数
+                var lag = (endTime - time) / 1000; //当前时间和结束时间之间的秒数
+                var nMS = 2000000000 * 1000 - date.getTime();
+                if (lag > 0) {
+                    var nMS2 = Math.floor(nMS / 100) % 10;
+                    var second = pad(Math.floor(lag % 60));
+                    var minite = pad(Math.floor((lag / 60) % 60)) ;
+                    var hour = pad(Math.floor((lag / 3600) % 24)) ;
+                    var day = pad(Math.floor((lag / 3600) / 24));
+                    $(this).html(day + "天" + hour + "时" + minite + "分" + second + "." + nMS2 + "秒");
+                } else{
+                    $(this).html("优惠已经结束啦！");
+                    $(this).parents('.course-endtime').hide();
+                }
+        }
+    });
+   setTimeout(function() {
+        updateEndTime(box);
+    }, 100);
+   function pad(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+};
+//首页头部广告淡出
+$('.appdownload .close_btn').click(function(){
+    var that = $(this);
+    that.parents('.appdownload').remove();
+    $('#topheader').remove();
+});
+$(window).scroll(function(){
+        var h = $(window).height(),//页面的高
+         t = $(window).scrollTop(),//滚动条的高
+         ap = $('.fixedtop'),
+         hd = $('.topheader');
+         cover = $('.search-box-cover'),
+         max =0.9,//透明度最大值
+         m = Number(t/h);//页面的高除流动条的高
+        if (t > 0) {
+            cover.css('opacity',m);
+            ap.addClass('fixedtop-half');
+            hd.hide();
+        }
+        if (hd.length === 0) {
+            ap.removeClass('fixedtop-half');
+        }
+        if(t <= 0){
+            cover.css('opacity','0');
+            ap.removeClass('fixedtop-half');
+            hd.show();
+        }
+        if (t > 100) {
+            cover.css('opacity',max);
+        }
+});
+// 筛选页面固定筛选栏目
+$(window).scroll(function(){
+        var t = $('body').scrollTop();
+        var h = $('.course_header').height();
+        if(t > h){
+            $('.find-teacher').css({
+                'position':'fixed',
+                'top':'0',
+                'width':'100%',
+                'box-shadow': '0 3px 10px #e4e5e9'
+            });
+        }else{
+            $('.find-teacher').css({
+                'position':'static'
+            });
+        }
+    })
+//课程详情页课程服务
+    $('.xes-server-item').click(function(event) {
+         var that = $(this);
+         var h =$(window).height();
+         $('body').addClass('scroll-body');
+         var xes = $('.layer-xes-server')
+         xes.css({'height':h,'display':'block'});
+         $('.server-body').css('height',(h -100));
+    });
+    $('.button-close-btn .close').click(function(){
+        var that = $(this);
+        that.parents('.layer-xes-server').hide();
+        $('.layer-audition-back').hide();
+         $('body').removeClass('scroll-body');
+    });
+    // 查看更多直播或录播大纲
+       $('body').on('tap','.lookMoreLine',function(){
+            var that= $(this);
+            var _tpl='<div class="layerMask"></div>';
+            var _body = $('body');
+            _body.addClass('scroll-body');
+            _body.append(_tpl);
+            that.next().addClass('animation-b');
+       });
+       $('body').on('tap','.team-know-btn',function(){
+            var that =$(this);
+            that.parents('.more-team-list-layer').removeClass('animation-b');
+            $('.layerMask').remove();
+            $('body').removeClass('scroll-body')
+       });

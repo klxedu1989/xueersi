@@ -1,0 +1,196 @@
+html{
+	font-size: 20px;
+}
+#box{
+/*	width:100%;
+	min-width: 320px;
+	max-width: 640px;
+	margin: 0 auto;
+	position: relative;*/
+
+}
+.box{
+	/*width:16.0rem;*/
+	/*width:100%;*/
+	/*min-width: 320px;
+	max-width: 640px;*/
+	/*margin: 0 auto;*/
+	/*position: relative;*/
+}
+.head{
+	height: 2.303rem;
+	border-bottom: 1px solid #ededed;
+	text-align: center;
+	line-height: 2.303rem;
+	padding: 0px 0.485rem;
+
+}
+.headSpan{
+	font-size: 1rem;
+}
+.headI{
+	/* width: 1.139rem; */
+    height: 0.8rem;
+    color: red;
+    background: url(../听讲座-学而思网校_files/2.png) no-repeat center;
+    background-size: 1rem;
+    margin-top: 0.364rem;
+    font-size: 0.25rem;
+}
+.head2{
+	width: 16.0rem;
+	height:1.939rem;
+	border-bottom: 1px solid #ededed;
+	
+
+}
+.head2L{
+	width:7.976rem;
+	height: 0.848rem;
+	border-right: 1px solid #ededed;
+	text-align: center;
+	margin-top: 0.7rem;
+}
+.head2R{
+	width:7.879rem;
+	height: 0.848rem;
+	text-align: center;
+	line-height: 1.939rem;
+}
+.ji{
+	background: #f5f5f5;
+	width: 100%;
+}
+.ji0{
+	/*width:9.515rem;*/
+	margin:0 auto;
+	text-align: center;
+
+
+}
+.ji0 a{
+	color:#666;
+}
+.ji1,.ji2{
+	height:1.237rem;
+	width:4.16rem;
+	border:1px solid #ddd;
+	text-align:center;
+	line-height: 1.237rem;
+	background: #fff;
+	width: 30%;
+
+}
+
+.section{
+	width:100%;
+
+}
+.section1{
+	width: 48%;
+    /*height: 9.279rem;*/
+    margin-left: 0.31rem;
+    border-bottom: 0.024rem solid #ededed;
+    padding-bottom:0.427rem;
+    margin-top:0.853rem;
+}
+.sectionImg{
+	/*width:95%;*/
+	max-width: 100%;
+	height: 117px;
+}
+.sectionI{
+	width: 2.061rem;
+	height:0.533rem;
+	line-height: 0.5rem;
+	background:url(../听讲座-学而思网校_files/1.png) no-repeat 0 0.064rem;
+	padding-left:0.7rem;
+	background-size:0.485rem;
+	margin-top:0.455rem;
+}
+.sectionP{
+	margin-bottom:0.848rem;
+	margin-top:0.4rem; 
+}
+.more{
+	width:100%;
+	height: 1.939rem;
+	background: #fbfbfb;
+	text-align: center;
+	line-height: 1.939rem;
+	font-size: 0.727rem;
+	color:#999;
+	margin-top:45.25rem;
+}
+.more a{
+	text-decoration: none;
+	color:#888;
+
+}
+.space{
+	width:100%;
+	height: 0.485rem;
+	background: #f5f5f5;
+	border:1px solid #ededed;
+}
+.footer1{
+	width:100%;
+	height: 1.794rem;
+	border-bottom: 1px solid #ededed;
+}
+.footer1-1{
+	width:100%;
+	height:0.25rem;
+	margin:0 auto;
+	margin-top:0.6rem;
+	line-height: 0.533rem;
+	font-size:0.25rem;
+}
+.footer2{
+	height:0.88rem;
+	text-align: center;
+	color:#888;
+	font-size: 0.2rem;
+}
+.xue div{
+	display: inline-block;width: 48%;height: 1.0rem;text-align:center;line-height: 1.0rem;
+}
+.xue a{
+	text-decoration: none;
+}
+.xue span{
+	font-size: 1rem;
+	color:#333;
+}
+.xueB {
+	position: relative;
+}
+.xueB span:after{
+	content:'';
+	width: 0.025rem;
+	height: 0.5rem;
+	background: #ededed;
+	display: inline-block;
+	position: absolute;
+	top: 0.230rem;
+    right: 0;
+}
+/*@media (min-width:768px){
+	.section .section1{
+		width:45%; 
+	}
+}
+@media(min-width:640px){
+	#box .ji{
+		width: inherit;
+	}
+	#box .ji0{
+		width: 100%;
+	}
+	#box .ji1{
+		width: 46%;
+	}
+	#box .ji2{
+		width: 46%;
+	}
+}*/
